@@ -5,8 +5,13 @@ ____
 * This system is designed as a lightweight, and modular tool for connecting agnostic monitoring, alerting, and future frameworks to be able to contact engineers and reporting chains via SMS and Phone Call.
 
 * **V1**: provide generic phone number that connects requestor to primary and secondary on-call contacts if there is an emergency.
-    * Leverages [Amazon Connect](https://aws.amazon.com/connect/)
-* **V2**: provide a system that draws in automated alerts from systems, and routes those alerts to engineers via SMS.
+    * [Amazon Connect](https://aws.amazon.com/connect/)
+        * This is AWS' Call Center in a box which allows for visual workflows using an IVR
+    * [AWS Lambda (Python)](https://docs.aws.amazon.com/lambda/latest/dg/lambda-python.html)
+        * Triggered by API Gateway or Pinpoint to pull contact info, and initiate response logic.
+    * [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
+        * Provides lightweight holding and access of engineer information, and on-call state (primary, escalation, off).
+* **V2**: Building off the first version, this provides a system that draws in automated alerts from systems, and routes those alerts to engineers via SMS.
     * [Amazon Pinpoint](https://aws.amazon.com/pinpoint/)
         * 2 Way SMS - allows engineers to receive and acknowledge alerts.
     * [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
