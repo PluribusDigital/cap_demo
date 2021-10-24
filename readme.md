@@ -14,6 +14,9 @@ ____
     * [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
         * Provides lightweight holding and access of engineer information, and on-call state (primary, escalation, off).
 * **V2**: Building off the first version, this provides a system that draws in automated alerts from systems, and routes those alerts to engineers via SMS.
+
+![CAP V2 System Design Diagram](CAP-SysV2.png)
+
     * [Amazon Pinpoint](https://aws.amazon.com/pinpoint/)
         * 2 Way SMS - allows engineers to receive and acknowledge alerts.
     * [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
