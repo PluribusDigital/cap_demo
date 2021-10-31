@@ -7,7 +7,7 @@ ____
     * [After Hours Call Escalation Flow JSON](AfterHours_IncomingWEscalation.json) (importable into a Connect instance)
 * [Lambda Configuration](lambda.md)
     * [CAP Get Current Agent Function](CAP-GetCurrentAgent.py)
-* DynamoDB Configuration
+* [DynamoDB Configuration](dynamodb.md)
 ___
 #### Design Goal: 
 * This system is designed as a lightweight, and modular tool for connecting agnostic monitoring, alerting, and future frameworks to be able to contact engineers and reporting chains via SMS and Phone Call.
