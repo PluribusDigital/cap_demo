@@ -1,0 +1,292 @@
+{
+    "modules": [
+        {
+            "id": "0ec76974-2bc8-4790-9da0-06f8b44914fd",
+            "type": "SetLoggingBehavior",
+            "branches": [
+                {
+                    "condition": "Success",
+                    "transition": "ef7d882a-cfc7-4fb7-819d-e2665b698580"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "LoggingBehavior",
+                    "value": "Enable"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 173,
+                    "y": 8
+                }
+            }
+        },
+        {
+            "id": "8d331baa-2304-410e-8116-bd7f1c492d8f",
+            "type": "PlayPrompt",
+            "branches": [
+                {
+                    "condition": "Success",
+                    "transition": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "Text",
+                    "value": "There was an issue reaching the On Call Manager. Please send an email to address dot com.",
+                    "namespace": null
+                },
+                {
+                    "name": "TextToSpeechType",
+                    "value": "text"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 786.5999755859375,
+                    "y": 616.7999877929688
+                },
+                "useDynamic": false
+            }
+        },
+        {
+            "id": "29d61300-bfa5-4e48-9a16-73717071a201",
+            "type": "Transfer",
+            "branches": [
+                {
+                    "condition": "Error",
+                    "transition": "8d331baa-2304-410e-8116-bd7f1c492d8f"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "TimeLimit",
+                    "value": "30"
+                },
+                {
+                    "name": "SourceName",
+                    "value": "CAP Afterhours"
+                },
+                {
+                    "name": "SourceNumber",
+                    "value": "+1555-555-5555"
+                },
+                {
+                    "name": "BlindTransfer",
+                    "value": true
+                },
+                {
+                    "name": "PhoneNumber",
+                    "value": "+1555-555-5555"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 827,
+                    "y": 425
+                },
+                "CountryCode": "us"
+            },
+            "target": "PhoneNumber"
+        },
+        {
+            "id": "ef7d882a-cfc7-4fb7-819d-e2665b698580",
+            "type": "GetUserInput",
+            "branches": [
+                {
+                    "condition": "Evaluate",
+                    "conditionType": "Equals",
+                    "conditionValue": "1",
+                    "transition": "b885c2d0-94a8-4482-bed0-4f993c41cd13"
+                },
+                {
+                    "condition": "Timeout",
+                    "transition": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c"
+                },
+                {
+                    "condition": "NoMatch",
+                    "transition": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c"
+                },
+                {
+                    "condition": "Error",
+                    "transition": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "Text",
+                    "value": "Hello, you've reached the CAP After Hours line. Please press 1 to be connected to an agent.",
+                    "namespace": null
+                },
+                {
+                    "name": "TextToSpeechType",
+                    "value": "text"
+                },
+                {
+                    "name": "Timeout",
+                    "value": "5"
+                },
+                {
+                    "name": "MaxDigits",
+                    "value": "1"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 422,
+                    "y": 45
+                },
+                "conditionMetadata": [
+                    {
+                        "id": "335655c2-0b71-42dc-8ecc-e285a4eaf349",
+                        "value": "1"
+                    }
+                ],
+                "useDynamic": false
+            },
+            "target": "Digits"
+        },
+        {
+            "id": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c",
+            "type": "Disconnect",
+            "branches": [],
+            "parameters": [],
+            "metadata": {
+                "position": {
+                    "x": 1091,
+                    "y": 520
+                }
+            }
+        },
+        {
+            "id": "19954280-579b-43ea-92b2-c16969917941",
+            "type": "PlayPrompt",
+            "branches": [
+                {
+                    "condition": "Success",
+                    "transition": "29d61300-bfa5-4e48-9a16-73717071a201"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "Text",
+                    "value": "There was an issue getting an on call engineer. The call will now transfer to the On Call Manager.",
+                    "namespace": null
+                },
+                {
+                    "name": "TextToSpeechType",
+                    "value": "text"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 586,
+                    "y": 447
+                },
+                "useDynamic": false
+            }
+        },
+        {
+            "id": "b885c2d0-94a8-4482-bed0-4f993c41cd13",
+            "type": "InvokeExternalResource",
+            "branches": [
+                {
+                    "condition": "Success",
+                    "transition": "0a572b6c-e8c1-4642-8b48-801c41642943"
+                },
+                {
+                    "condition": "Error",
+                    "transition": "19954280-579b-43ea-92b2-c16969917941"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "FunctionArn",
+                    "value": "arn:aws:lambda:us-east-1:AWSAccountHere:function:GetCurrentAgent",
+                    "namespace": null
+                },
+                {
+                    "name": "TimeLimit",
+                    "value": "8"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 47,
+                    "y": 392
+                },
+                "dynamicMetadata": {},
+                "useDynamic": false
+            },
+            "target": "Lambda"
+        },
+        {
+            "id": "0a572b6c-e8c1-4642-8b48-801c41642943",
+            "type": "Transfer",
+            "branches": [
+                {
+                    "condition": "Success",
+                    "transition": "0fdff27e-4605-42cd-be3e-9af89fa6bc3c"
+                },
+                {
+                    "condition": "CallFailure",
+                    "transition": "19954280-579b-43ea-92b2-c16969917941"
+                },
+                {
+                    "condition": "Timeout",
+                    "transition": "19954280-579b-43ea-92b2-c16969917941"
+                },
+                {
+                    "condition": "Error",
+                    "transition": "19954280-579b-43ea-92b2-c16969917941"
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "TimeLimit",
+                    "value": "30"
+                },
+                {
+                    "name": "SourceName",
+                    "value": "CAP Afterhours"
+                },
+                {
+                    "name": "SourceNumber",
+                    "value": "+1555-555-5555"
+                },
+                {
+                    "name": "BlindTransfer",
+                    "value": false
+                },
+                {
+                    "name": "PhoneNumber",
+                    "value": "Address",
+                    "namespace": "External"
+                }
+            ],
+            "metadata": {
+                "position": {
+                    "x": 443,
+                    "y": 669
+                }
+            },
+            "target": "PhoneNumber"
+        }
+    ],
+    "version": "1",
+    "type": "contactFlow",
+    "start": "0ec76974-2bc8-4790-9da0-06f8b44914fd",
+    "metadata": {
+        "entryPointPosition": {
+            "x": 15,
+            "y": 17.999984741210994
+        },
+        "snapToGrid": false,
+        "name": "AfterHours_IncomingWEscalation",
+        "description": "After Hours with Incoming Escalation Rules",
+        "type": "contactFlow",
+        "status": "published",
+        "hash": "987fa4c3aca34c654fddeb1f723eed12a95ce91f0c65647fd5c1d6fe798aa52d"
+    }
+}
