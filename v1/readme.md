@@ -6,7 +6,7 @@ ____
     * [Connect Setup](connect_setup.md)
     * [After Hours Call Escalation Flow JSON](AfterHours_IncomingWEscalation.json) (importable into a Connect instance)
 * [Lambda Configuration](lambda.md)
-    * [CAP Get Current Agent Function](CAP-GetCurrentAgent.)
+    * [CAP Get Current Agent Function](CAP-GetCurrentAgent.py)
 * DynamoDB Configuration
 ___
 #### Design Goal: 
