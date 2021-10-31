@@ -4,7 +4,7 @@ ____
 #### Key Files
 * Amazon Connect Key Docs and Files
     * [Connect Setup](connect_setup.md)
-    * [After Hours Call Escalation Flow JSON](AfterHouse_IncomingWEscalation.json) (importable into a Connect instance)
+    * [After Hours Call Escalation Flow JSON](AfterHours_IncomingWEscalation.json) (importable into a Connect instance)
 * [Lambda Configuration](lambda.md)
     * [CAP Get Current Agent Function](CAP-GetCurrentAgent.)
 * DynamoDB Configuration
