@@ -4,7 +4,7 @@ ____
 #### Design Goal: 
 * This system is designed as a lightweight, and modular tool for connecting agnostic monitoring, alerting, and future frameworks to be able to contact engineers and reporting chains via SMS and Phone Call.
 
-* **V1**: This version provided a generic phone number that connects requestor to primary and secondary on-call contacts if there is an emergency.
+* [**V1**](/v1/readme.md): This version provided a generic phone number that connects requestor to primary and secondary on-call contacts if there is an emergency.
 ![CAP V1 System Design Diagram](CAP-SysV1.png)
 
     * [Amazon Connect](https://aws.amazon.com/connect/)
